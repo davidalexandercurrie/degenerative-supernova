@@ -1,12 +1,55 @@
 let counter = 1;
 let grow = 1;
 let buttons = [];
+let sliders = [];
 let id = 0;
 console.log(window.location.search == '?frame' ? 'frame' : 'notframe');
 
 function waitForDom() {
   if (window.location.search != '?frame') {
     setInterval(function () {
+      if (Math.random() > 0.95) {
+        const slider = document.createElement('input');
+        const div = document.createElement('div');
+        slider.setAttribute('type', 'range');
+        slider.className = 'slider';
+        sliders.push(slider);
+        slider.style.transform =
+          'rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+        slider.onchange = function () {
+          for (let i = 0; i < sliders.length; i++)
+            sliders[i].style.transform =
+              'rotate(' + Math.floor(Math.random() * 360) + 'deg)';
+          {
+          }
+        };
+        let color =
+          'rgb(' +
+          String(Math.floor(Math.random() * 255)) +
+          ',' +
+          String(Math.floor(Math.random() * 255)) +
+          ',' +
+          String(Math.floor(Math.random() * 255));
+        slider.style.position = 'absolute';
+        let left =
+          50 +
+          Math.random() *
+            (grow == 0 ? 1 : grow) *
+            (Math.random() > 0.5 ? -1 : 1);
+        let right =
+          50 +
+          Math.random() *
+            (grow == 0 ? 1 : grow) *
+            (Math.random() > 0.5 ? -1 : 1);
+        slider.style.left = left + 'vw';
+        slider.style.top = right + 'vh';
+        div.appendChild(slider);
+        slider.background = 'none';
+        container.appendChild(div);
+        div.style.fill = color;
+        div.style.stroke = 'none';
+      }
+
       for (let i = 0; i < counter; i++) {
         var limit = Math.max(
           document.body.scrollHeight,
@@ -146,6 +189,30 @@ function waitForDom() {
       if (Math.random() > 0.9) {
         counter++;
         grow += 2;
+      }
+      if (Math.random() > 0.95) {
+        let buttonsToRemove = buttons.length / 1.15;
+        let virusStartPoint = Math.floor(
+          Math.random() * buttons.length - buttonsToRemove
+        );
+        virusStartPoint = virusStartPoint < 0 ? 0 : virusStartPoint;
+        for (
+          let i = virusStartPoint;
+          i < virusStartPoint + buttonsToRemove;
+          i++
+        ) {
+          buttons[i].remove();
+        }
+
+        for (
+          let i = virusStartPoint;
+          i < virusStartPoint + buttonsToRemove;
+          i++
+        ) {
+          buttons.splice(i, 1);
+        }
+        // grow = Math.floor(grow / 2);
+        counter -= Math.floor(counter / 2);
       }
     }
   }
