@@ -110,7 +110,7 @@ function waitForDom() {
         counter++;
         grow += 2;
       }
-      console.log(buttons.length, grow);
+      // console.log(buttons.length, grow);
     }, 100);
 
     setInterval(() => {
