@@ -15,6 +15,13 @@ function waitForDom() {
           document.documentElement.scrollHeight,
           document.documentElement.offsetHeight
         );
+        var limitX = Math.max(
+          document.body.scrollWidth,
+          document.body.offsetWidth,
+          document.documentElement.clientWidth,
+          document.documentElement.scrollWidth,
+          document.documentElement.offsetWidth
+        );
         let btn = document.createElement('BUTTON');
         btn.innerHTML = 'CLICK ME'; // Insert text
         btn.parentElement;
@@ -47,9 +54,11 @@ function waitForDom() {
         let paddingValue = String(Math.floor(Math.random() * 5)) + 'px';
         btn.style.padding = paddingValue;
         let scrollToPosition = Math.random() * limit * 2;
+        let scrollToPositionX = Math.random() * limitX * 2;
         btn.onclick = function () {
           window.scrollTo({
             top: String(scrollToPosition),
+            left: String(scrollToPositionX),
             behavior: 'smooth',
           });
         };
@@ -62,7 +71,7 @@ function waitForDom() {
     }, 100);
 
     setInterval(() => {
-      let buttonsToRemove = buttons.length / 1.05;
+      let buttonsToRemove = buttons.length / 1.15;
       let virusStartPoint = Math.floor(
         Math.random() * buttons.length - buttonsToRemove
       );
