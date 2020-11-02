@@ -27,11 +27,8 @@ html {
   background: #ff28fa;
 }
 
-.button {
-  font-size: 3px;
-}
-
 #container button {
-  letter-spacing: 2px;
+  letter-spacing: 5px;
+  font-size: 10px;
 }
 /*# sourceMappingURL=style.css.map */
